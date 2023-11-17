@@ -2,6 +2,9 @@ package com.example.crud10.controller;
 
 import com.example.crud10.payload.FruitDto;
 import com.example.crud10.service.FruitService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/fruit")
+@Tag(name = "Fruit API'S")
 public class FruitController {
     private final FruitService fruitService;
 
@@ -20,6 +24,10 @@ public class FruitController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Create Fruit",
+            description = "Create Fruit API"
+    )
     public ResponseEntity<FruitDto> createFruit(@Valid @RequestBody FruitDto fruitDto){
         return new ResponseEntity<>(fruitService.createFruit(fruitDto), HttpStatus.OK);
     }
