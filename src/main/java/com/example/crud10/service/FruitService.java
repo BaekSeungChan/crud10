@@ -1,4 +1,8 @@
 package com.example.crud10.service;
 
-public class FruitService {
+import com.example.crud10.payload.FruitDto;
+
+public interface FruitService {
+
+    FruitDto createFruit(FruitDto fruitDto);
 }
