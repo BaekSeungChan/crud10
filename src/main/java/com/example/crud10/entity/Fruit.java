@@ -16,4 +16,8 @@ public class Fruit {
     private Long id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "information_id")
+    private Information information;
 }

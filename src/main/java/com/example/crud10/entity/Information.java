@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +20,7 @@ public class Information {
     private String description;
 
     private Integer price;
+
+    @OneToMany(mappedBy = "information", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Fruit> fruits;
 }
