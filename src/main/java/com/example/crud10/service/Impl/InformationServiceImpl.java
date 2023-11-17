@@ -44,4 +44,10 @@ public class InformationServiceImpl implements InformationService {
         return modelMapper.map(information, InformationDto.class);
     }
 
+    @Override
+    public void deleteInformation(long id){
+        Information information = infromationRepository.findById(id).orElseThrow(()-> new RuntimeException("No id"));
+        infromationRepository.delete(information);
+    }
+
 }

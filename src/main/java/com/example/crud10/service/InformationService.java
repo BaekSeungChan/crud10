@@ -12,4 +12,6 @@ public interface InformationService {
     List<InformationDto> getAllInformation();
 
     InformationDto detailInformationById(long id);
+
+    void deleteInformation(long id);
 }

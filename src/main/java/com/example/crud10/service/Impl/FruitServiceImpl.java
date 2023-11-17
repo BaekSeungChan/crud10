@@ -1,6 +1,7 @@
 package com.example.crud10.service.Impl;
 
 import com.example.crud10.entity.Fruit;
+import com.example.crud10.entity.Information;
 import com.example.crud10.payload.FruitDto;
 import com.example.crud10.repository.FruitRepository;
 import com.example.crud10.service.FruitService;
@@ -42,5 +43,11 @@ public class FruitServiceImpl implements FruitService {
         Fruit fruit  = fruitRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
 
         return modelMapper.map(fruit, FruitDto.class);
+    }
+
+    @Override
+    public void deleteFruit(long id){
+        Fruit fruit = fruitRepository.findById(id).orElseThrow(()-> new RuntimeException("No id"));
+        fruitRepository.delete(fruit);
     }
 }

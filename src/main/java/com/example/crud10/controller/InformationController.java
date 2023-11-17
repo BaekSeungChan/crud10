@@ -34,4 +34,10 @@ public class InformationController {
         return ResponseEntity.ok(informationService.detailInformationById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteInformation(@PathVariable(name = "id") long id){
+        informationService.deleteInformation(id);
+        return ResponseEntity.ok("deleted information");
+    }
+
 }
