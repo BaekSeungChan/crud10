@@ -1,11 +1,16 @@
 package com.example.crud10.service.Impl;
 
+import com.example.crud10.entity.Fruit;
 import com.example.crud10.entity.Information;
+import com.example.crud10.payload.FruitDto;
 import com.example.crud10.payload.InformationDto;
 import com.example.crud10.repository.InfromationRepository;
 import com.example.crud10.service.InformationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InformationServiceImpl implements InformationService {
@@ -25,4 +30,18 @@ public class InformationServiceImpl implements InformationService {
 
         return modelMapper.map(saveInformation, InformationDto.class);
     }
+
+    @Override
+    public List<InformationDto> getAllInformation(){
+        List<Information> informations = infromationRepository.findAll();
+        return informations.stream().map((information) -> modelMapper.map(information, InformationDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public InformationDto detailInformationById(long id){
+        Information information = infromationRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+
+        return modelMapper.map(information, InformationDto.class);
+    }
+
 }

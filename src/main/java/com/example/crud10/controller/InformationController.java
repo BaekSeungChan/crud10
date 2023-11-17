@@ -1,14 +1,14 @@
 package com.example.crud10.controller;
 
+import com.example.crud10.payload.FruitDto;
 import com.example.crud10.payload.InformationDto;
 import com.example.crud10.service.InformationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/information")
@@ -23,4 +23,15 @@ public class InformationController {
     public ResponseEntity<InformationDto> createInformation(@Valid @RequestBody InformationDto informationDto){
         return new ResponseEntity<>(informationService.createInformation(informationDto), HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<InformationDto>> getAllInformation(){
+        return ResponseEntity.ok(informationService.getAllInformation());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<InformationDto> detailInformationById(@PathVariable(name = "id") long id){
+        return ResponseEntity.ok(informationService.detailInformationById(id));
+    }
+
 }

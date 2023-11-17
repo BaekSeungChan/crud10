@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FruitServiceImpl implements FruitService {
     private final FruitRepository fruitRepository;
@@ -26,4 +29,18 @@ public class FruitServiceImpl implements FruitService {
         return modelMapper.map(saveFruit, FruitDto.class);
     }
 
+    @Override
+    public List<FruitDto> getAllFruit(){
+        List<Fruit> fruits = fruitRepository.findAll();
+
+        return fruits.stream().map((fruit) -> modelMapper.map(fruit, FruitDto.class)).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public FruitDto detailFruitById(long id){
+        Fruit fruit  = fruitRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+
+        return modelMapper.map(fruit, FruitDto.class);
+    }
 }
