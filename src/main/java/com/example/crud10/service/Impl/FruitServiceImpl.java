@@ -50,4 +50,16 @@ public class FruitServiceImpl implements FruitService {
         Fruit fruit = fruitRepository.findById(id).orElseThrow(()-> new RuntimeException("No id"));
         fruitRepository.delete(fruit);
     }
+
+    @Override
+    public FruitDto updateFruit(FruitDto fruitDto, long id){
+        Fruit fruit = fruitRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+
+        fruit.setName(fruitDto.getName());
+
+        Fruit saveFruit = fruitRepository.save(fruit);
+
+        return modelMapper.map(saveFruit, FruitDto.class);
+
+    }
 }

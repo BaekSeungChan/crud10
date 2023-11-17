@@ -40,4 +40,10 @@ public class FruitController {
         return ResponseEntity.ok("deleted information");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<FruitDto> updateFruit(@PathVariable(name = "id")long id, @Valid @RequestBody FruitDto fruitDto){
+        FruitDto saveFruit = fruitService.updateFruit(fruitDto, id);
+        return new ResponseEntity<>(saveFruit, HttpStatus.OK);
+    }
+
 }

@@ -14,4 +14,6 @@ public interface InformationService {
     InformationDto detailInformationById(long id);
 
     void deleteInformation(long id);
+
+    InformationDto updateInformation(InformationDto informationDto, long id);
 }

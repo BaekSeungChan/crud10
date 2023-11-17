@@ -14,4 +14,6 @@ public interface FruitService {
 
     void deleteFruit(long id);
 
+    FruitDto updateFruit(FruitDto fruitDto, long id);
+
 }

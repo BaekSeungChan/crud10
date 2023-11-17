@@ -50,4 +50,16 @@ public class InformationServiceImpl implements InformationService {
         infromationRepository.delete(information);
     }
 
+    @Override
+    public InformationDto updateInformation(InformationDto informationDto, long id){
+        Information information = infromationRepository.findById(id).orElseThrow(() -> new RuntimeException("No id"));
+
+        information.setDescription(informationDto.getDescription());
+        information.setPrice(informationDto.getPrice());
+
+        Information saveInformation = infromationRepository.save(information);
+
+        return modelMapper.map(saveInformation, InformationDto.class);
+    }
+
 }

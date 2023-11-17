@@ -40,4 +40,10 @@ public class InformationController {
         return ResponseEntity.ok("deleted information");
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<InformationDto> updateInformation(@PathVariable(name = "id") long id, @Valid @RequestBody InformationDto informationDto){
+        InformationDto InformationResponse = informationService.updateInformation(informationDto, id);
+        return new ResponseEntity<>(InformationResponse, HttpStatus.OK);
+    }
+
 }
